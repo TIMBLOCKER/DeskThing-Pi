@@ -55,7 +55,7 @@ if which electron-vite > /dev/null
         echo "electron-vite is installed - no installation needed"
     else
         npm install electron-vite
-        npm install @vitejs/plugin-react 
+        npm install electron
     fi    
 
 
@@ -63,11 +63,12 @@ if which electron-vite > /dev/null
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
 
 chmod -R a+rwx ~/DeskThing
+chmod -R a+rwx ~/node_modules
 
 #Change into DeskThing Server Directory
 cd DeskThing/DeskThingServer
 ifconfig #get IP Adress
-npm run dev --host #DeskThing can be accessed from outside with IP-Adress and Port 8891
+sudo -u $USER npm run dev --host #DeskThing can be accessed from outside with IP-Adress and Port 8891
 
 #Display DeskThing in FullScreen on RPi
 DISPLAY=:0.0 chromium-browser --noerrdialogs --incognito --kiosk http://localhost:8891/
