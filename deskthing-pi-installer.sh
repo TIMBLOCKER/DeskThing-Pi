@@ -103,8 +103,4 @@ chmod -R a+rwx ~/node_modules
 cd DeskThing/DeskThingServer
 ifconfig #get IP Adress
 
-echo "  ___      _                __ _      _    _           _ _ "
-echo " / __| ___| |_ _  _ _ __   / _(_)_ _ (_)__| |_  ___ __| | |"
-echo " \__ \/ -_)  _| || | '_ \ |  _| | ' \| (_-< ' \/ -_) _` |_|"
-echo " |___/\___|\__|\_,_| .__/ |_| |_|_||_|_/__/_||_\___\__,_(_)"
-echo "                   |_|                                     "
+echo "Setup finished!"
