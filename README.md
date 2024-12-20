@@ -1,10 +1,20 @@
+
 ![Youtube Banner](https://github.com/user-attachments/assets/78aa432b-e86e-4945-9b57-931a7ae5c5cb)
+# DeskThing-Pi 
 
+### What brought us here?
+Some days ago I was stumbling upon a wonderful project by the very talented [ItsRiprod](https://github.com/ItsRiprod) who tried to save the ever doomed Spotify CarThing from becoming total E-Waste. Unfortunately the opposite seemed to be happening. Everyone now wants to have an EOL CarThing to be able to run DeskThing on it.
 
-![image](https://github.com/user-attachments/assets/4f4ee062-14df-49df-968a-d196746ef80f)
-![image](https://github.com/user-attachments/assets/5fbf8e30-e468-424e-bad4-b6a4b656feb4)
+Rather than trying to get my hands on one of these, I wanted to get it running on my Raspberry Pi 4. So this is the official Repo of DeskThing-Pi.
 
- > ❔[Reddit Link](https://reddit.com/r/DeskThing)
+## Want to get started?⚙️
+Just copy the Link into your command line and see where this is going:
+
+    bash -c  "$(curl -sL https://raw.githubusercontent.com/TIMBLOCKER/DeskThing-Pi/refs/heads/main/deskthing-pi-installer.sh)
+
+### Manual Installation process
+
+> ❔[Reddit Link](https://reddit.com/r/DeskThing)
 
  > 📃[Trello Board](https://trello.com/b/6v0paxqV/deskthing)
 
