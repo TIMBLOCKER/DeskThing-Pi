@@ -98,6 +98,7 @@ git clone https://github.com/ItsRiprod/DeskThing DeskThing
 
 chmod -R a+rwx ~/DeskThing
 chmod -R a+rwx ~/node_modules
+sudo chmod 777 -R ~/DeskThing
 
 #Change into DeskThing Server Directory
 cd DeskThing/DeskThingServer
