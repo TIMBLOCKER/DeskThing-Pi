@@ -35,6 +35,8 @@ while true; do
         if which rpi-connect > /dev/null
     then
         echo "rpi-connect is already installed - No installation needed!"
+        rpi-connect on; 
+        rpi-connect signin
     else
     echo "................................................................................................................................."
     echo "Installing rpi-connect and starting server"
@@ -90,15 +92,15 @@ if which electron-vite > /dev/null
     fi    
 
 #Check and Install  @vitejs/plugin-react as a dependency for the electron-vite
-if which @vitejs/plugin-react > /dev/null
-    then
-        echo "@vitejs/plugin-react is installed - No installation needed"
-    else
+package='@vitejs/plugin-react'
+if [ `npm list -g | grep -c $package` -eq 0 ]; then
     echo "................................................................................................................................."
     echo "Installing @vitejs/plugin-react"
     echo "................................................................................................................................."
-        apt install @vitejs/plugin-react -y
-    fi    
+    npm install $package --no-shrinkwrap
+else
+    echo "@vitejs/plugin-react is installed - No installation needed"    
+fi
 
 echo "................................................................................................................................."
 echo "Step 3: Clone ItsRiprod/DeskThing"
@@ -108,8 +110,8 @@ echo "..........................................................................
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
 
 
-chmod 777 -R ~/node_modules
-chmod 777 -R ~/DeskThing
+sudo chmod 777 -R ~/node_modules
+sudo chmod 777 -R ~/DeskThing
 
 #Change into DeskThing Server Directory
 cd DeskThing/DeskThingServer
@@ -117,4 +119,4 @@ ifconfig #get IP Adress
 
 echo "Setup finished!"
 
-cd /DeskThing/DeskThingServer
+cd DeskThing/DeskThingServer
