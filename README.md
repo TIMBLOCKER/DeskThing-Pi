@@ -35,22 +35,19 @@ If you've set everything according up correctly you should be able to SSH into y
     sudo bash -c  "$(curl -sL https://raw.githubusercontent.com/TIMBLOCKER/DeskThing-Pi/refs/heads/main/deskthing-pi-installer.sh)"
 
 ### Setup Permissions to run DeskThingServer
-Because RaspberryPi OS is a Linux derivative we now need to set up the permission structure of the Pi to be able to recognize the installed dependencies. This can be done by executing the following two commands:
-
-    sudo  chmod  777  -R  node_modules
-and
+Because RaspberryPi OS is a Linux derivative we now need to set up the permission structure of the Pi to be able to recognize the installed dependencies. This can be done by executing the following command:
 
     sudo  chmod  777  -R  DeskThing
 
 ### Starting DeskThingServer
 
-Now you have everything to get started. With the command: 
+Now you have everything to get started.  With the command: 
 
     npm run dev --host
 
  in your ``~/DeskThing/DeskThingServer/`` directory you can start the server, expose it to your network and install your Apps as needed.
 
-> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer. 
+> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer, also you can not run this off of a SSH console. Currently it is not possible to this command without physical access to the device. 
 
 ### Starting DeskThingClient
 After the Server successfully started you can install the client via the Server App. When the install process is finished you can easily start you DeskThingPi by typing:
