@@ -78,17 +78,19 @@ if which npm > /dev/null
     echo "................................................................................................................................."
         apt install npm -y
     fi
-
-#Check and Install dependencies for running deskthing-client locally
-npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
   
 
 echo "................................................................................................................................."
-echo "Step 3: Clone ItsRiprod/DeskThing"
+echo "Step 3: Clone ItsRiprod/DeskThing and add dependencies"
 echo "................................................................................................................................."
 
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
+
+cd DeskThing/DeskThingServer
+
+#Check and Install dependencies for running deskthing-client locally
+npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
 
 echo "Setup finished!"
 
