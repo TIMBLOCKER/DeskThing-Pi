@@ -26,32 +26,6 @@ echo "..........................................................................
 apt update
 apt full-upgrade -y
 
-
-#Check and Install rpi-connect for remote access (can be skipped if connected with physical access)
-while true; do
-    read -p "Do you wish to install rpi-connect for remote access [Y/N]? " yn
-    case $yn in
-        [Yy]* ) 
-        if which rpi-connect > /dev/null
-    then
-        echo "rpi-connect is already installed - No installation needed!"
-        rpi-connect on; 
-        rpi-connect signin
-    else
-    echo "................................................................................................................................."
-    echo "Installing rpi-connect and starting server"
-    echo "................................................................................................................................."
-        apt install rpi-connect
-        rpi-connect on; 
-        rpi-connect signin
-    fi
-
-break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer Yy (Yes) or Nn (No).";;
-    esac
-done
-
 echo "................................................................................................................................."
 echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
 echo "................................................................................................................................."
