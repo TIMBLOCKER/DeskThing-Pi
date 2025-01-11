@@ -15,7 +15,7 @@ As this project is still in a really early stage, I can only confirm that things
 ##### Mandatory
  - Hardware: Raspberry Pi 4 (I use the 4GB  Version but others should work as well)
  - Standard Raspberry Pi OS (64 Bit) freshly installed (I prefer to use the Raspberry Pi Imager to flash the OS)
-> Attention 
+> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer.
 
 ##### Useful but not entriely necessary
 
