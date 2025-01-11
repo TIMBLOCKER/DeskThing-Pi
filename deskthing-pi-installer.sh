@@ -80,7 +80,7 @@ if which npm > /dev/null
     fi
 
 #Check and Install dependencies for running deskthing-client locally
-npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer 
+npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
   
 
 echo "................................................................................................................................."
