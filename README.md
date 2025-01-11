@@ -27,6 +27,7 @@ As this project is still in a really early stage, I can only confirm that things
  - WIFI enabled and already provided with SSID and Password
  - Language Settings correctly set
  - Configured User with known Password
+ - Access with RPI-Connect (to enable use `rpi-connect on` and `rpi-connect signin`)
 
 ## Installing DeskThingPI
 ### Connect to your Pi and run setup
