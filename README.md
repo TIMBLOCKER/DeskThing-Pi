@@ -48,7 +48,7 @@ Now you have everything to get started.  With the command:
 
  in your ``~/DeskThing/DeskThingServer/`` directory you can start the server, expose it to your network and install your Apps as needed.
 
-> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer, also you can not run this off of a SSH console. Currently it is not possible to this command without physical access to the device. 
+> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer, also you can not run this off of a SSH console. Currently it is not possible to this command without physical access to the device. When starting the DeskThingServer many white Errors are shown. This does not affect the startup of the Server at all!
 
 ### Starting DeskThingClient
 After the Server successfully started you can install the client via the Server App. When the install process is finished you can easily start you DeskThingPi by typing:
