@@ -89,18 +89,12 @@ if which electron-vite > /dev/null
     echo "................................................................................................................................."
         npm install electron-vite
         npm install electron
+    #Install  @vitejs/plugin-react as a dependency for the electron-vite    
+    echo "................................................................................................................................."
+    echo "Installing @vitejs/plugin-react (Dependency of electron-vite)"
+    echo "................................................................................................................................."
+        npm install @vitejs/plugin-react    
     fi    
-
-#Check and Install  @vitejs/plugin-react as a dependency for the electron-vite
-package='@vitejs/plugin-react'
-if [ `npm list -g | grep -c $package` -eq 0 ]; then
-    echo "................................................................................................................................."
-    echo "Installing @vitejs/plugin-react"
-    echo "................................................................................................................................."
-    npm install $package --no-shrinkwrap
-else
-    echo "@vitejs/plugin-react is installed - No installation needed"    
-fi
 
 echo "................................................................................................................................."
 echo "Step 3: Clone ItsRiprod/DeskThing"
@@ -114,9 +108,6 @@ sudo chmod 777 -R ~/node_modules
 sudo chmod 777 -R ~/DeskThing
 
 #Change into DeskThing Server Directory
-cd DeskThing/DeskThingServer
 ifconfig #get IP Adress
 
 echo "Setup finished!"
-
-cd DeskThing/DeskThingServer
