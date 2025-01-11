@@ -56,14 +56,14 @@ echo "..........................................................................
 
 
 #Check and Install node as a base for the deskthing-server
-if which node > /dev/null
+if which nodejs > /dev/null
     then
-        echo "node is installed - No installation needed"
+        echo "nodejs is installed - No installation needed"
     else
     echo "................................................................................................................................."
-    echo "Installing node"
+    echo "Installing nodejs"
     echo "................................................................................................................................."
-        apt install node -y
+        apt install nodejs -y
     fi
 
 #Check and Install npm as a package manager for downloading repo
@@ -89,6 +89,17 @@ if which electron-vite > /dev/null
         npm install electron
     fi    
 
+#Check and Install  @vitejs/plugin-react as a dependency for the electron-vite
+if which @vitejs/plugin-react > /dev/null
+    then
+        echo "@vitejs/plugin-react is installed - No installation needed"
+    else
+    echo "................................................................................................................................."
+    echo "Installing @vitejs/plugin-react"
+    echo "................................................................................................................................."
+        apt install @vitejs/plugin-react -y
+    fi    
+
 echo "................................................................................................................................."
 echo "Step 3: Clone ItsRiprod/DeskThing"
 echo "................................................................................................................................."
@@ -96,12 +107,14 @@ echo "..........................................................................
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
 
-chmod -R a+rwx ~/DeskThing
-chmod -R a+rwx ~/node_modules
-sudo chmod 777 -R ~/DeskThing
+
+chmod 777 -R ~/node_modules
+chmod 777 -R ~/DeskThing
 
 #Change into DeskThing Server Directory
 cd DeskThing/DeskThingServer
 ifconfig #get IP Adress
 
 echo "Setup finished!"
+
+cd /DeskThing/DeskThingServer
