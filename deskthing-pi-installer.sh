@@ -104,8 +104,8 @@ echo "..........................................................................
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
 
 
-sudo chmod 777 -R /home/$USER/node_modules
-sudo chmod 777 -R /home/$USER/DeskThing
+sudo chmod 777 -R node_modules
+sudo chmod 777 -R DeskThing
 
 ifconfig #get IP Adress
 
