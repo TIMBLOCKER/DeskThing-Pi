@@ -80,7 +80,7 @@ if which npm > /dev/null
     fi
 
 #Check and Install dependencies for running deskthing-client locally
-npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite 
+npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer 
   
 
 echo "................................................................................................................................."
@@ -89,11 +89,6 @@ echo "..........................................................................
 
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
-
-sudo chmod 777 -R node_modules
-sudo chmod 777 -R DeskThing
-
-ifconfig #get IP Adress
 
 echo "Setup finished!"
 
