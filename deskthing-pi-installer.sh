@@ -79,22 +79,9 @@ if which npm > /dev/null
         apt install npm -y
     fi
 
-#Check and Install electron-vite for running deskthing-client locally
-if which electron-vite > /dev/null
-    then
-        echo "electron-vite is installed - No installation needed"
-    else
-    echo "................................................................................................................................."
-    echo "Installing electron and electron-vite"
-    echo "................................................................................................................................."
-        npm install electron-vite
-        npm install electron
-    #Install  @vitejs/plugin-react as a dependency for the electron-vite    
-    echo "................................................................................................................................."
-    echo "Installing @vitejs/plugin-react (Dependency of electron-vite)"
-    echo "................................................................................................................................."
-        npm install @vitejs/plugin-react    
-    fi    
+#Check and Install dependencies for running deskthing-client locally
+npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite 
+  
 
 echo "................................................................................................................................."
 echo "Step 3: Clone ItsRiprod/DeskThing"
@@ -102,7 +89,6 @@ echo "..........................................................................
 
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing DeskThing
-
 
 sudo chmod 777 -R node_modules
 sudo chmod 777 -R DeskThing
