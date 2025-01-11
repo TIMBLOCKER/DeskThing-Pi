@@ -1,4 +1,5 @@
 
+
 <p align="center">
     <img width="500" src="https://github.com/TIMBLOCKER/DeskThing-Pi/blob/ac63a235907ffbdf23b503e45caf5946f0584b99/readme_images/deskthing-PI.png" alt="DeskThing-Pi logo">
 </p>
@@ -43,13 +44,20 @@ and
 
 ### Starting DeskThingServer
 
-Now you have everything to get started. With the command: ``npm run dev --host`` in your ``~/DeskThing/DeskThingServer/`` directory you can start the server and install your Apps as needed.
+Now you have everything to get started. With the command: 
 
-> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer.
+    npm run dev --host
+
+ in your ``~/DeskThing/DeskThingServer/`` directory you can start the server, expose it to your network and install your Apps as needed.
+
+> Attention: Here it is essential that you have installed the GUI Version of Raspbian because otherwise you wil get some errors with the build pipeline of DeskThingServer. 
 
 ### Starting DeskThingClient
 After the Server successfully started you can install the client via the Server App. When the install process is finished you can easily start you DeskThingPi by typing:
-``DISPLAY=:0.0 chromium-browser --noerrdialogs --incognito --kiosk http://localhost:8891/`` in your command line. This will open the DeskThingPi in Kioskmode.
+
+    DISPLAY=:0.0 chromium-browser --noerrdialogs --incognito --kiosk http://localhost:8891/
+
+ in your command line. This will open the DeskThingPi in Kioskmode.
 
 > Attention: You can always exit the Kiosk Mode and go back to the DeskThingServer Settings by pressing ``ALT`` and ``SPACE`` on the keyboard.
 
