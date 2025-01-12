@@ -156,7 +156,7 @@ EOF
 
 cd ..
 cd ..
-$DESKPATH="$(realpath ".")"
+DESKPATH=$(realpath .)
 cd $DESKPATH/.config/systemd/user/
 
 cat > $DESKPATH/.config/systemd/user/deskthing.service <<EOF
