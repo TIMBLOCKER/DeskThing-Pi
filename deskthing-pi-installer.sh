@@ -156,10 +156,10 @@ EOF
 
 cd ..
 cd ..
-$DESKPATH"$(realpath "DeskThing")"
-cd /.config/systemd/user/
+$DESKPATH="$(realpath ".")"
+cd $DESKPATH/.config/systemd/user/
 
-cat > ~/.config/systemd/user/deskthing.service <<EOF
+cat > $DESKPATH/.config/systemd/user/deskthing.service <<EOF
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
@@ -175,7 +175,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-cat > ~/.config/systemd/user/sandbox.service <<EOF
+cat > $DESKPATH/.config/systemd/user/sandbox.service <<EOF
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
