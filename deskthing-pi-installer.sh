@@ -169,7 +169,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory="$DESKPATH"/DeskThingServer
+WorkingDirectory=$DESKPATH/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -177,7 +177,6 @@ RestartSec=10
 [Install]
 WantedBy=default.target
 EOF
-
 cat > "$DESKPATH"/.config/systemd/user/sandbox.service <<EOF
 [Unit]
 Description=DeskThing Client Starter
@@ -186,7 +185,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory="$DESKPATH"/client_sandbox
+WorkingDirectory=$DESKPATH/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -195,14 +194,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-systemctl --user daemon-reload
-
-systemctl --user enable deskthing.service
-systemctl --user enable sandbox.service
-
-systemctl --user start deskthing.service
-systemctl --user start sandbox.service
-
 echo "Setup finished!"
 
+echo "Follow last documentation step to enable Autostart"
 
