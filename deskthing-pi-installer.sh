@@ -66,5 +66,136 @@ cd DeskThing/DeskThingServer
 #Check and Install dependencies for running deskthing-client locally
 npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
 
+echo "................................................................................................................................."
+echo "Step 4: Autostart DeskThing"
+echo "................................................................................................................................."
+
+
+cd ..
+
+mkdir client_sandbox
+
+cd client_sandbox
+
+npm init -y
+
+cat > package.json <<EOF
+{
+  "name": "sandbox_client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "starter.js",
+  "scripts": {
+    "start": "electron starter.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^33.3.1"
+  }
+}
+EOF
+
+cat > starter.js <<EOF
+const { app, BrowserWindow, globalShortcut } = require('electron');
+let mainWindow;
+
+function createWindow() {
+  mainWindow = new BrowserWindow({
+    width: 1920,  // Set the width of the window
+    height: 1080, // Set the height of the window
+    fullscreen: true, // Set the window to fullscreen
+    webPreferences: {
+      nodeIntegration: true, // Enable node integration (if needed)
+    },
+  });
+
+  mainWindow.loadURL("http://localhost:8891/"); // Load the URL
+
+  // Close the window if the 'Esc' key is pressed
+  mainWindow.webContents.on('keydown', (event) => {
+    if (event.key === 'Escape') {
+      app.quit(); // Close the application when the 'Esc' key is pressed
+    }
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null; // Cleanup when the window is closed
+  });
+}
+
+app.whenReady().then(() => {
+  createWindow();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow(); // Recreate the window if all windows are closed (macOS)
+    }
+  });
+
+  // Register global shortcut (optional) to close the app on 'Esc'
+  globalShortcut.register('Esc', () => {
+    app.quit(); // Close the application when 'Esc' is pressed
+  });
+});
+
+ // Register global shortcut (optional) to close the app on 'Esc'
+  globalShortcut.register('M', () => {
+   mainWindow.minimize();
+  });
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit(); // Quit the app if all windows are closed (except macOS)
+  }
+});
+EOF
+
+cd ~/.config/systemd/user/
+
+cat > deskthing.service <<EOF
+[Unit]
+Description=DeskThing Server Starter
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/$USER/DeskThing/DeskThingServer
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+EOF
+
+cat > sandbox.service <<EOF
+[Unit]
+Description=DeskThing Client Starter
+After=deskthing.service
+Requires=deskthing.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/$USER/DeskThing/DeskThingServer
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+EOF
+
+systemctl --user daemon-reload
+
+systemctl --user enable deskthing.service
+systemctl --user enable sandbox.service
+
+systemctl --user start deskthing.service
+systemctl --user start sandbox.service
+
 echo "Setup finished!"
+
 
