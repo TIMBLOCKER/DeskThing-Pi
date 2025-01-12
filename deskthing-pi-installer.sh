@@ -73,6 +73,7 @@ echo "..........................................................................
 
 cd ..
 
+
 mkdir client_sandbox
 
 cd client_sandbox
@@ -153,7 +154,10 @@ app.on('window-all-closed', () => {
 });
 EOF
 
-cd /home/$USER/.config/systemd/user/
+cd ..
+cd ..
+DESKPATH = realpath DeskThing
+cd /.config/systemd/user/
 
 cat > deskthing.service <<EOF
 [Unit]
@@ -162,7 +166,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/$USER/DeskThing/DeskThingServer
+WorkingDirectory=$DESKPATH/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -179,7 +183,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=/home/$USER/DeskThing/DeskThingServer
+WorkingDirectory=$DESKPATH/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
