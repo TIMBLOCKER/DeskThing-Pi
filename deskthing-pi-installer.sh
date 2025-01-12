@@ -153,7 +153,7 @@ app.on('window-all-closed', () => {
 });
 EOF
 
-cd ~/.config/systemd/user/
+cd /home/$USER/.config/systemd/user/
 
 cat > deskthing.service <<EOF
 [Unit]
