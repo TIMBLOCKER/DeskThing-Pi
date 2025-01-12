@@ -156,17 +156,20 @@ EOF
 
 cd ..
 cd ..
-DESKPATH $(realpath .)
-cd $DESKPATH/.config/systemd/user/
+DESKPATH=$(realpath .)
 
-cat > $DESKPATH/.config/systemd/user/deskthing.service <<EOF
+# Ausgabe der Variable DESKPATH, um zu prüfen, ob sie korrekt zugewiesen wurde
+echo "DESKPATH: $DESKPATH"
+cd "$DESKPATH"/.config/systemd/user/
+
+cat > "$DESKPATH"/.config/systemd/user/deskthing.service <<EOF
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=$DESKPATH/DeskThingServer
+WorkingDirectory="$DESKPATH"/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -175,7 +178,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-cat > $DESKPATH/.config/systemd/user/sandbox.service <<EOF
+cat > "$DESKPATH"/.config/systemd/user/sandbox.service <<EOF
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
@@ -183,7 +186,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=$DESKPATH/client_sandbox
+WorkingDirectory="$DESKPATH"/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
