@@ -78,8 +78,6 @@ mkdir client_sandbox
 
 cd client_sandbox
 
-npm init -y
-
 cat > package.json <<EOF
 {
   "name": "sandbox_client",
@@ -154,6 +152,10 @@ app.on('window-all-closed', () => {
 });
 EOF
 
+npm init -y
+
+npm install electron
+
 cd ..
 cd ..
 DESKPATH=$(realpath .)
@@ -169,7 +171,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=$DESKPATH/DeskThingServer
+WorkingDirectory=$DESKPATH/DeskThing/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -185,7 +187,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=$DESKPATH/client_sandbox
+WorkingDirectory=$DESKPATH/DeskThing/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
