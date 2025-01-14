@@ -26,8 +26,8 @@ echo "...........        .......................................................
 echo "................................................................................................................................."
 echo "Step 1: Update/Upgrade Pi to newest Version"
 echo "................................................................................................................................."
-apt update
-apt full-upgrade -y
+sudo apt update
+sudo apt full-upgrade -y
 
 echo "................................................................................................................................."
 echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
@@ -42,7 +42,7 @@ if which nodejs > /dev/null
     echo "................................................................................................................................."
     echo "Installing nodejs"
     echo "................................................................................................................................."
-        apt install nodejs -y
+        sudo apt install nodejs -y
     fi
 
 #Check and Install npm as a package manager for downloading repo
@@ -53,7 +53,7 @@ if which npm > /dev/null
     echo "................................................................................................................................."
     echo "Installing npm"
     echo "................................................................................................................................."
-        apt install npm -y
+        sudo apt install npm -y
     fi
   
 
@@ -185,15 +185,15 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-chmod  777  -R  $HOME/bin/DeskThing
+sudo chmod  777  -R  $HOME/bin/DeskThing
 
-systemctl daemon-reload
+sudo systemctl daemon-reload
 
-systemctl enable deskthing.service
-systemctl enable sandbox.service
+sudo systemctl enable deskthing.service
+sudo systemctl enable sandbox.service
 
-systemctl start deskthing.service
-systemctl start sandbox.service
+sudo systemctl start deskthing.service
+sudo systemctl start sandbox.service
 
 
 echo "Setup finished!"
