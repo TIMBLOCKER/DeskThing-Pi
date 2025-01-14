@@ -1,5 +1,5 @@
 #!/bin/bash
-. /usr/bin
+. $HOME/bin
 
 #Execute on ~/
 #This installer will download and create all neccessary components to run DeskThing on Rapsberry Pi 4
@@ -64,7 +64,7 @@ echo "..........................................................................
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing /usr/bin/DeskThing
 
-cd /usr/bin/DeskThing/DeskThingServer
+cd $HOME/bin/DeskThing/DeskThingServer
 
 #Check and Install dependencies for running deskthing-client locally
 npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
@@ -159,7 +159,7 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/usr/bin/DeskThing/DeskThingServer
+WorkingDirectory=$HOME/bin/DeskThing/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -176,7 +176,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=/usr/bin/DeskThing/client_sandbox
+WorkingDirectory=$HOME/bin/DeskThing/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -185,7 +185,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-chmod  777  -R  /usr/bin/DeskThing
+chmod  777  -R  $HOME/bin/DeskThing
 
 systemctl daemon-reload
 
