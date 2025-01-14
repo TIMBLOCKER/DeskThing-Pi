@@ -1,3 +1,6 @@
+#!/bin/bash
+. /usr/bin
+
 #Execute on ~/
 #This installer will download and create all neccessary components to run DeskThing on Rapsberry Pi 4
 
@@ -73,14 +76,13 @@ echo "..........................................................................
 
 cd ..
 
-
 mkdir client_sandbox
 
 cd client_sandbox
 
 cat > package.json <<EOF
 {
-  "name": "sandbox_client",
+  "name": "client_sandbox",
   "version": "1.0.0",
   "description": "",
   "main": "starter.js",
@@ -139,12 +141,6 @@ app.whenReady().then(() => {
   });
 });
 
- // Register global shortcut (optional) to close the app on 'Esc'
-  globalShortcut.register('M', () => {
-   mainWindow.minimize();
-  });
-});
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit(); // Quit the app if all windows are closed (except macOS)
@@ -156,22 +152,14 @@ npm init -y
 
 npm install electron
 
-cd ..
-cd ..
-DESKPATH=$(realpath .)
-
-# Ausgabe der Variable DESKPATH, um zu prüfen, ob sie korrekt zugewiesen wurde
-echo "DESKPATH: $DESKPATH"
-cd "$DESKPATH"/.config/systemd/user/
-
-cat > "$DESKPATH"/.config/systemd/user/deskthing.service <<EOF
+cat > /etc/systemd/system/deskthing.service <<EOF
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=$DESKPATH/DeskThing/DeskThingServer
+WorkingDirectory=/usr/bin/DeskThing/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -179,7 +167,8 @@ RestartSec=10
 [Install]
 WantedBy=default.target
 EOF
-cat > "$DESKPATH"/.config/systemd/user/sandbox.service <<EOF
+
+cat > /etc/systemd/system/sandbox.service <<EOF
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
@@ -187,7 +176,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=$DESKPATH/DeskThing/client_sandbox
+WorkingDirectory=/usr/bin/DeskThing/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -196,7 +185,16 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-echo "Setup finished!"
+chmod  777  -R  DeskThing
 
-echo "Follow last documentation step to enable Autostart"
+systemctl daemon-reload
+
+systemctl enable deskthing.service
+systemctl enable sandbox.service
+
+systemctl start deskthing.service
+systemctl start sandbox.service
+
+
+echo "Setup finished!"
 
