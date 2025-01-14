@@ -185,7 +185,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-chmod  777  -R  DeskThing
+chmod  777  -R  /usr/bin/DeskThing
 
 systemctl daemon-reload
 
