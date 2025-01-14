@@ -62,9 +62,9 @@ echo "Step 3: Clone ItsRiprod/DeskThing and add dependencies"
 echo "................................................................................................................................."
 
 #Git clone DeskThing
-git clone https://github.com/ItsRiprod/DeskThing DeskThing
+git clone https://github.com/ItsRiprod/DeskThing /usr/bin/DeskThing
 
-cd DeskThing/DeskThingServer
+cd /usr/bin/DeskThing/DeskThingServer
 
 #Check and Install dependencies for running deskthing-client locally
 npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
