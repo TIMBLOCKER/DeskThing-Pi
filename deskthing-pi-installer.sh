@@ -33,29 +33,12 @@ echo "..........................................................................
 echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
 echo "................................................................................................................................."
 
+#Check and Install nvm as a base for the deskthing-server
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-#Check and Install node as a base for the deskthing-server
-if which nodejs > /dev/null
-    then
-        echo "nodejs is installed - No installation needed"
-    else
-    echo "................................................................................................................................."
-    echo "Installing nodejs"
-    echo "................................................................................................................................."
-        sudo apt install nodejs -y
-    fi
+nvm install node
 
-#Check and Install npm as a package manager for downloading repo
-if which npm > /dev/null
-    then
-        echo "npm is installed - No installation needed"
-    else
-    echo "................................................................................................................................."
-    echo "Installing npm"
-    echo "................................................................................................................................."
-        sudo apt install npm -y
-    fi
-  
+nvm install-latest-npm
 
 echo "................................................................................................................................."
 echo "Step 3: Clone ItsRiprod/DeskThing and add dependencies"
