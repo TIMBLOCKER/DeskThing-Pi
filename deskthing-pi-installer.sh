@@ -152,7 +152,7 @@ npm init -y
 
 npm install electron
 
-sudo cat > /etc/systemd/system/deskthing.service <<EOF
+sudo tee -a /etc/systemd/system/deskthing.service >/dev/null <<'EOF'
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
@@ -168,7 +168,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-sudo cat > /etc/systemd/system/sandbox.service <<EOF
+sudo tee -a /etc/systemd/system/sandbox.service >/dev/null <<'EOF'
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
@@ -185,7 +185,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-sudo chmod  777  -R  $HOME/bin/DeskThing
+sudo chmod  777  -R  $HOME/DeskThing
 
 sudo systemctl daemon-reload
 
