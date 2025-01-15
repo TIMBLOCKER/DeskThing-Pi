@@ -26,8 +26,8 @@ echo "...........        .......................................................
 echo "................................................................................................................................."
 echo "Step 1: Update/Upgrade Pi to newest Version"
 echo "................................................................................................................................."
-apt update
-apt full-upgrade -y
+sudo apt update
+sudo apt full-upgrade -y
 
 echo "................................................................................................................................."
 echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
@@ -51,7 +51,6 @@ echo "..........................................................................
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing $HOME/DeskThing
 
-chmod  777  -R  $HOME/.config/systemd/user/
 chmod  777  -R  $HOME/DeskThing
 
 cd $HOME/DeskThing/DeskThingServer
@@ -74,7 +73,11 @@ mkdir client_sandbox
 
 cd client_sandbox
 
-tee -a package.json >/dev/null <<'EOF'
+node -v > .nvmrc
+
+nvm use
+
+cat <<EOF > package.json
 {
   "name": "client_sandbox",
   "version": "1.0.0",
@@ -92,7 +95,7 @@ tee -a package.json >/dev/null <<'EOF'
 }
 EOF
 
-tee -a starter.js >/dev/null <<'EOF'
+cat <<EOF > starter.js 
 const { app, BrowserWindow, globalShortcut } = require('electron');
 let mainWindow;
 
@@ -146,7 +149,7 @@ npm init -y
 
 npm install electron 
 
-tee -a $HOME/.config/systemd/user/deskthing.service >/dev/null <<'EOF'
+cat <<EOF > /$HOME/.config/systemd/user/deskthing.service
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
@@ -162,7 +165,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-tee -a $HOME/.config/systemd/user/sandbox.service >/dev/null <<'EOF'
+cat <<EOF > /$HOME/.config/systemd/user/sandbox.service
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
@@ -179,13 +182,13 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-#systemctl --user daemon-reload
+systemctl --user daemon-reload
 
-#systemctl --user enable deskthing.service
-#systemctl --user enable sandbox.service
+systemctl --user enable deskthing.service
+systemctl --user enable sandbox.service
 
-#systemctl --user start sandbox.service
-
+systemctl --user start deskthing.service
+systemctl --user start sandbox.service
 
 echo "Setup finished!"
 
