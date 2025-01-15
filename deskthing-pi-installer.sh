@@ -26,8 +26,10 @@ echo "...........        .......................................................
 echo "................................................................................................................................."
 echo "Step 1: Update/Upgrade Pi to newest Version"
 echo "................................................................................................................................."
+
 sudo apt update
 sudo apt full-upgrade -y
+
 
 echo "................................................................................................................................."
 echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
@@ -42,7 +44,9 @@ export NVM_DIR="$HOME/.nvm"
 
 nvm install node
 
+
 nvm install-latest-npm
+
 
 echo "................................................................................................................................."
 echo "Step 3: Clone ItsRiprod/DeskThing and add dependencies"
@@ -98,6 +102,7 @@ EOF
 cat <<EOF > starter.js 
 const { app, BrowserWindow, globalShortcut } = require('electron');
 let mainWindow;
+
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -189,6 +194,7 @@ systemctl --user enable sandbox.service
 
 systemctl --user start deskthing.service
 systemctl --user start sandbox.service
+
 
 echo "Setup finished!"
 
