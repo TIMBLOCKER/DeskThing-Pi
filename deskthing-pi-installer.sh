@@ -56,6 +56,10 @@ cd $HOME/DeskThing/DeskThingServer
 #Check and Install dependencies for running deskthing-client locally
 npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
 
+node -v > .nvmrc
+
+nvm use
+
 echo "................................................................................................................................."
 echo "Step 4: Autostart DeskThing"
 echo "................................................................................................................................."
@@ -67,7 +71,7 @@ mkdir client_sandbox
 
 cd client_sandbox
 
-sudo cat > package.json <<EOF
+tee -a package.json >/dev/null <<'EOF'
 {
   "name": "client_sandbox",
   "version": "1.0.0",
@@ -85,7 +89,7 @@ sudo cat > package.json <<EOF
 }
 EOF
 
-sudo cat > starter.js <<EOF
+tee -a starter.js >/dev/null <<'EOF'
 const { app, BrowserWindow, globalShortcut } = require('electron');
 let mainWindow;
 
@@ -139,15 +143,17 @@ npm init -y
 
 npm install electron
 
-sudo tee -a /etc/systemd/system/deskthing.service >/dev/null <<'EOF'
+sudo chmod  777  -R  $HOME/.config/systemd/user/
+
+tee -a $HOME/.config/systemd/user/deskthing.service >/dev/null <<'EOF'
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=$HOME/DeskThing/DeskThingServer
-ExecStart=/usr/bin/npm start
+WorkingDirectory=${HOME@Q}/DeskThing/DeskThingServer
+ExecStart=${HOME@Q}/.nvm/nvm-exec npm start
 Restart=always
 RestartSec=10
 
@@ -155,7 +161,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-sudo tee -a /etc/systemd/system/sandbox.service >/dev/null <<'EOF'
+tee -a $HOME/.config/systemd/user/sandbox.service >/dev/null <<'EOF'
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
@@ -163,8 +169,8 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=$HOME/DeskThing/client_sandbox
-ExecStart=/usr/bin/npm start
+WorkingDirectory=${HOME@Q}/DeskThing/client_sandbox
+ExecStart=${HOME@Q}/.nvm/nvm-exec npm start
 Restart=always
 RestartSec=10
 
@@ -174,13 +180,13 @@ EOF
 
 sudo chmod  777  -R  $HOME/DeskThing
 
-sudo systemctl daemon-reload
+sudo systemctl --user daemon-reload
 
-sudo systemctl enable deskthing.service
-sudo systemctl enable sandbox.service
+sudo systemctl --user enable deskthing.service
+sudo systemctl --user enable sandbox.service
 
-sudo systemctl start deskthing.service
-sudo systemctl start sandbox.service
+sudo systemctl --user start deskthing.service
+sudo systemctl --user start sandbox.service
 
 
 echo "Setup finished!"
