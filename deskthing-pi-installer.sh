@@ -1,5 +1,5 @@
 #!/bin/bash
-. $HOME/bin
+. $HOME
 
 #Execute on ~/
 #This installer will download and create all neccessary components to run DeskThing on Rapsberry Pi 4
@@ -62,9 +62,9 @@ echo "Step 3: Clone ItsRiprod/DeskThing and add dependencies"
 echo "................................................................................................................................."
 
 #Git clone DeskThing
-git clone https://github.com/ItsRiprod/DeskThing /usr/bin/DeskThing
+git clone https://github.com/ItsRiprod/DeskThing $HOME/DeskThing
 
-cd $HOME/bin/DeskThing/DeskThingServer
+cd $HOME/DeskThing/DeskThingServer
 
 #Check and Install dependencies for running deskthing-client locally
 npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
@@ -80,7 +80,7 @@ mkdir client_sandbox
 
 cd client_sandbox
 
-cat > package.json <<EOF
+sudo cat > package.json <<EOF
 {
   "name": "client_sandbox",
   "version": "1.0.0",
@@ -98,7 +98,7 @@ cat > package.json <<EOF
 }
 EOF
 
-cat > starter.js <<EOF
+sudo cat > starter.js <<EOF
 const { app, BrowserWindow, globalShortcut } = require('electron');
 let mainWindow;
 
@@ -152,14 +152,14 @@ npm init -y
 
 npm install electron
 
-cat > /etc/systemd/system/deskthing.service <<EOF
+sudo cat > /etc/systemd/system/deskthing.service <<EOF
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=$HOME/bin/DeskThing/DeskThingServer
+WorkingDirectory=$HOME/DeskThing/DeskThingServer
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
@@ -168,7 +168,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-cat > /etc/systemd/system/sandbox.service <<EOF
+sudo cat > /etc/systemd/system/sandbox.service <<EOF
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
@@ -176,7 +176,7 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=$HOME/bin/DeskThing/client_sandbox
+WorkingDirectory=$HOME/DeskThing/client_sandbox
 ExecStart=/usr/bin/npm start
 Restart=always
 RestartSec=10
