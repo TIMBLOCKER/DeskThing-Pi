@@ -102,19 +102,44 @@ EOF
 cat <<EOF > starter.js 
 const { app, BrowserWindow, globalShortcut } = require('electron');
 let mainWindow;
-
+let intervalId;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1920,  // Set the width of the window
+    width: 1920, // Set the width of the window
     height: 1080, // Set the height of the window
     fullscreen: true, // Set the window to fullscreen
+    alwaysOnTop: true, // Ensure the window is always on top
     webPreferences: {
       nodeIntegration: true, // Enable node integration (if needed)
     },
   });
 
-  mainWindow.loadURL("http://localhost:8891/"); // Load the URL
+  const urlToLoad = "http://localhost:8891/";
+
+  // Function to refresh the page if the content is empty
+  function checkAndReload() {
+    if (!mainWindow) return;
+
+    mainWindow.webContents.executeJavaScript('document.body.innerHTML.trim()')
+      .then((content) => {
+        if (!content) {
+          console.log('Page is empty, reloading...');
+          mainWindow.loadURL(urlToLoad);
+        } else {
+          console.log('Page content detected, stopping reload checks.');
+          clearInterval(intervalId); // Stop the interval once content is loaded
+        }
+      })
+      .catch((error) => {
+        console.error('Error checking page content:', error);
+      });
+  }
+
+  mainWindow.loadURL(urlToLoad);
+
+  // Start interval to check page content every 5 seconds
+  intervalId = setInterval(checkAndReload, 5000);
 
   // Close the window if the 'Esc' key is pressed
   mainWindow.webContents.on('keydown', (event) => {
@@ -125,6 +150,9 @@ function createWindow() {
 
   mainWindow.on('closed', () => {
     mainWindow = null; // Cleanup when the window is closed
+    if (intervalId) {
+      clearInterval(intervalId); // Ensure the interval is cleared
+    }
   });
 }
 
