@@ -1,6 +1,3 @@
-
-
-
 <p align="center">
     <img width="500" src="https://github.com/TIMBLOCKER/DeskThing-Pi/blob/ac63a235907ffbdf23b503e45caf5946f0584b99/readme_images/deskthing-PI.png" alt="DeskThing-Pi logo">
 </p>
@@ -38,6 +35,7 @@ If you've set everything according up correctly you should be able to SSH into y
 
 ### Starting DeskThingClient
 After the Setup has completed you should have one fullsize white window and the DeskThingServer Console running. Now you can install the client via the Server App. Just go to `Clients > Download Client`. After the download is completed just click `Refresh Client` and press `ESC`. This will trigger the Pi to restart the browser for the Client App. This will open the DeskThingPi in Kioskmode.
+
 
 > Attention: You can always exit the Client App and go back to the DeskThingServer Settings by pressing ``ESC`` on the keyboard. The Client App will restart automatically after 10 Seconds.
 
