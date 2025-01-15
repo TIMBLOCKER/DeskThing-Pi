@@ -26,8 +26,8 @@ echo "...........        .......................................................
 echo "................................................................................................................................."
 echo "Step 1: Update/Upgrade Pi to newest Version"
 echo "................................................................................................................................."
-sudo apt update
-sudo apt full-upgrade -y
+apt update
+apt full-upgrade -y
 
 echo "................................................................................................................................."
 echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
@@ -50,6 +50,9 @@ echo "..........................................................................
 
 #Git clone DeskThing
 git clone https://github.com/ItsRiprod/DeskThing $HOME/DeskThing
+
+chmod  777  -R  $HOME/.config/systemd/user/
+chmod  777  -R  $HOME/DeskThing
 
 cd $HOME/DeskThing/DeskThingServer
 
@@ -141,9 +144,7 @@ EOF
 
 npm init -y
 
-npm install electron
-
-sudo chmod  777  -R  $HOME/.config/systemd/user/
+npm install electron 
 
 tee -a $HOME/.config/systemd/user/deskthing.service >/dev/null <<'EOF'
 [Unit]
@@ -152,8 +153,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=${HOME@Q}/DeskThing/DeskThingServer
-ExecStart=${HOME@Q}/.nvm/nvm-exec npm start
+WorkingDirectory=${HOME}/DeskThing/DeskThingServer
+ExecStart=${HOME}/.nvm/nvm-exec npm start
 Restart=always
 RestartSec=10
 
@@ -169,8 +170,8 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=${HOME@Q}/DeskThing/client_sandbox
-ExecStart=${HOME@Q}/.nvm/nvm-exec npm start
+WorkingDirectory=${HOME}/DeskThing/client_sandbox
+ExecStart=${HOME}/.nvm/nvm-exec npm start
 Restart=always
 RestartSec=10
 
@@ -178,15 +179,12 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-sudo chmod  777  -R  $HOME/DeskThing
+systemctl --user daemon-reload
 
-sudo systemctl --user daemon-reload
+systemctl --user enable deskthing.service
+systemctl --user enable sandbox.service
 
-sudo systemctl --user enable deskthing.service
-sudo systemctl --user enable sandbox.service
-
-sudo systemctl --user start deskthing.service
-sudo systemctl --user start sandbox.service
+systemctl --user start sandbox.service
 
 
 echo "Setup finished!"
