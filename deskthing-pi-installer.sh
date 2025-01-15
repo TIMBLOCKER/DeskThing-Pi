@@ -153,8 +153,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=${HOME}/DeskThing/DeskThingServer
-ExecStart=${HOME}/.nvm/nvm-exec npm start
+WorkingDirectory=$HOME/DeskThing/DeskThingServer
+ExecStart=$HOME/.nvm/nvm-exec npm start
 Restart=always
 RestartSec=10
 
@@ -170,8 +170,8 @@ Requires=deskthing.service
 
 [Service]
 Type=simple
-WorkingDirectory=${HOME}/DeskThing/client_sandbox
-ExecStart=${HOME}/.nvm/nvm-exec npm start
+WorkingDirectory=$HOME/DeskThing/client_sandbox
+ExecStart=$HOME/.nvm/nvm-exec npm start
 Restart=always
 RestartSec=10
 
@@ -179,12 +179,12 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-systemctl --user daemon-reload
+#systemctl --user daemon-reload
 
-systemctl --user enable deskthing.service
-systemctl --user enable sandbox.service
+#systemctl --user enable deskthing.service
+#systemctl --user enable sandbox.service
 
-systemctl --user start sandbox.service
+#systemctl --user start sandbox.service
 
 
 echo "Setup finished!"
