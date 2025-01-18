@@ -224,23 +224,26 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  createWindow();
+  // Add a 60-second delay
+  setTimeout(() => {
+    createWindow();
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
+    app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow(); // Recreate the window if all windows are closed (macOS)
+      }
+    });
 
-  // Register a global shortcut (optional) to close the app on 'Esc'
-  globalShortcut.register('Esc', () => {
-    app.quit();
-  });
+    // Register global shortcut (optional) to close the app on 'Esc'
+    globalShortcut.register('Esc', () => {
+      app.quit(); // Close the application when 'Esc' is pressed
+    });
+  }, 60000); // 60 seconds delay
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    app.quit(); // Quit the app if all windows are closed (except macOS)
   }
 });
 EOF
