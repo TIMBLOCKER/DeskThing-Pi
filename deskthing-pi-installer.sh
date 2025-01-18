@@ -234,10 +234,14 @@ app.whenReady().then(() => {
       }
     });
 
-    // Register global shortcut (optional) to close the app on 'Esc'
-    globalShortcut.register('Esc', () => {
-      app.quit(); // Close the application when 'Esc' is pressed
-    });
+    // Register global shortcut for 'Esc'
+  globalShortcut.register('Esc', () => {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore(); // Maximize if minimized
+    } else {
+      mainWindow.minimize(); // Minimize if not minimized
+    }
+  });
   }, 60000); // 60 seconds delay
 });
 
