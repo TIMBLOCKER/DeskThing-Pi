@@ -182,7 +182,7 @@ npm init -y
 
 npm install electron 
 
-cat <<EOF > /$HOME/.config/systemd/user/deskthing.service
+cat <<EOF > $HOME/.config/systemd/user/deskthing.service
 [Unit]
 Description=DeskThing Server Starter
 After=network.target
@@ -198,7 +198,7 @@ RestartSec=10
 WantedBy=default.target
 EOF
 
-cat <<EOF > /$HOME/.config/systemd/user/sandbox.service
+cat <<EOF > $HOME/.config/systemd/user/sandbox.service
 [Unit]
 Description=DeskThing Client Starter
 After=deskthing.service
