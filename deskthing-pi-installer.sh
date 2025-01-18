@@ -182,6 +182,8 @@ npm init -y
 
 npm install electron 
 
+mkdir -p $HOME/.config/systemd/user
+
 cat <<EOF > $HOME/.config/systemd/user/deskthing.service
 [Unit]
 Description=DeskThing Server Starter
