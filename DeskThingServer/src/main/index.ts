@@ -17,6 +17,7 @@ import { AppIPCData, AuthScopes, Client, UtilityIPCData, MESSAGE_TYPES } from '@
 import { app, shell, BrowserWindow, ipcMain, Tray, Menu, nativeImage } from 'electron'
 import { join, resolve } from 'path'
 import icon from '../../resources/icon.png?asset'
+import puppeteer from 'puppeteer';
 
 // Global window and tray references to prevent garbage collection
 let mainWindow: BrowserWindow | null = null
@@ -68,6 +69,19 @@ function createMainWindow(): BrowserWindow {
   // Show window when ready
   window.on('ready-to-show', () => {
     window.show()
+
+      //Lauch Browser to show DeskThingClient
+    (async () => {
+      const browser = await puppeteer.launch({
+        headless: false,
+        args: ['--start-fullscreen']
+      });
+
+      const page = await browser.newPage();
+      await page.goto('http://localhost:8891/');
+
+      await new Promise(() => {});
+    })();
   })
 
   // Clean up reference when window is closed
