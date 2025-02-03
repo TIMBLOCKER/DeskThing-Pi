@@ -31,10 +31,10 @@ sudo apt update
 sudo apt full-upgrade -y
 
 echo "................................................................................................................................."
-echo "Step 2: Check and install dependencies (node/npm/electron/electron-vite)"
+echo "Step 2: Check and install current version of node/npm"
 echo "................................................................................................................................."
 
-# Check and Install nvm as a base for the deskthing-server
+#Check and Install nvm as a base for the deskthing-server
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 export NVM_DIR="$HOME/.nvm"
@@ -42,15 +42,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 nvm install node
-nvm install-latest-npm
 
+nvm install-latest-npm
 
 echo "................................................................................................................................."
 echo "Step 3: Clone TIMBLOCKER/DeskThing-Pi and add dependencies"
 echo "................................................................................................................................."
 
+
 # Git clone DeskThing
-git clone -b rawLaunch --single-branch https://github.com/TIMBLOCKER/DeskThing-Pi $HOME/DeskThing
+git clone https://github.com/TIMBLOCKER/DeskThing-Pi $HOME/DeskThing
 
 chmod 777 -R $HOME/DeskThing
 
@@ -60,13 +61,13 @@ cd $HOME/DeskThing/DeskThingServer
 npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
 
 node -v > .nvmrc
+
 nvm use
 
 echo "................................................................................................................................."
 echo "Step 4: Autostart DeskThing"
 echo "................................................................................................................................."
 
-# Create user-level systemd services
 mkdir -p $HOME/.config/systemd/user
 
 cat <<EOF > $HOME/.config/systemd/user/deskthing.service
