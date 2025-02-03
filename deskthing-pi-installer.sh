@@ -57,7 +57,7 @@ chmod 777 -R $HOME/DeskThing
 cd $HOME/DeskThing/DeskThingServer
 
 # Check and Install dependencies for running deskthing-client locally
-npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite puppeteer
+npm install electron electron-vite @vitejs/plugin-react tailwindcss postcss autoprefixer vite
 
 node -v > .nvmrc
 nvm use
