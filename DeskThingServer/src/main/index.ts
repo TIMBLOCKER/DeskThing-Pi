@@ -67,7 +67,10 @@ function createMainWindow(): BrowserWindow {
 
   // Show window when ready
   window.on('ready-to-show', () => {
-    window.show()
+    window.show();
+
+      clientWindow = createClientWindow(8891);
+
   })
 
   // Clean up reference when window is closed
@@ -106,10 +109,12 @@ function createMainWindow(): BrowserWindow {
 function createClientWindow(port: number): BrowserWindow {
   // Create window with specific dimensions and settings for client
   const window = new BrowserWindow({
-    width: 800,
-    height: 480,
+    width: 1920,
+    height: 1080,
     minWidth: 500,
     minHeight: 140,
+    fullscreen: true,
+    alwaysOnTop: true,
     show: false,
     frame: true,
     icon: icon,
